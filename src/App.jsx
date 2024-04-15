@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Toaster } from 'react-hot-toast';
 import { fetchContacts } from './redux/contactsOps';
 import { selectError, selectLoading } from './redux/contactsSlice';
 import ContactForm from './components/ContactForm/ContactForm';
@@ -19,6 +20,7 @@ function App() {
   return (
     <div>
       <h1>Phonebook</h1>
+      <Toaster position="top-right" />
       <ContactForm />
       <SearchBox />
       <ContactList />
