@@ -31,7 +31,7 @@ const contactsSlice = createSlice({
       .addCase(addContact.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.items.push(action.payload.text);
+        state.items.push(action.payload);
       })
       .addCase(addContact.rejected, handleRejected)
       .addCase(deleteContact.pending, handlePending)
@@ -49,17 +49,23 @@ const contactsSlice = createSlice({
     selectContacts: state => {
       return state.items;
     },
+    selectLoading: state => {
+      return state.loading;
+    },
+    selectError: state => {
+      return state.error;
+    },
   },
 });
 
 export const contactsReducer = contactsSlice.reducer;
 
-export const { selectContacts } = contactsSlice.selectors;
+export const { selectContacts, selectLoading, selectError } =
+  contactsSlice.selectors;
 
 export const selectFilteredContacts = createSelector(
   [selectContacts, selectNameFilter],
   (contacts, filter) => {
-    console.log(contacts);
     return contacts.filter(
       contact =>
         contact.name.toLowerCase().includes(filter.toLowerCase()) ||

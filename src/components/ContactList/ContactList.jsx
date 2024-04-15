@@ -5,16 +5,12 @@ import css from './ContactList.module.css';
 
 const ContactList = () => {
   const contacts = useSelector(selectFilteredContacts);
-  console.log(contacts);
+
   return (
     <ul className={css.contactList}>
-      {contacts.map(contact => (
-        <li key={contact.id} className={css.contactListItem}>
-          <Contact
-            name={contact.name}
-            number={contact.number}
-            id={contact.id}
-          />
+      {contacts.map(({ id, name, number }) => (
+        <li key={id} className={css.contactListItem}>
+          <Contact name={name} number={number} id={id} />
         </li>
       ))}
     </ul>
