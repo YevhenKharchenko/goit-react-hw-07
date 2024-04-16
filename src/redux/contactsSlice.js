@@ -17,6 +17,12 @@ const contactsSlice = createSlice({
     items: [],
     loading: false,
     error: null,
+    deletedId: null,
+  },
+  reducers: {
+    setDeletedId(state, action) {
+      state.deletedId = action.payload;
+    },
   },
   extraReducers: builder => {
     builder
@@ -42,6 +48,7 @@ const contactsSlice = createSlice({
           contact => contact.id === action.payload.id
         );
         state.items.splice(index, 1);
+        state.deletedId = null;
       })
       .addCase(deleteContact.rejected, handleRejected);
   },
@@ -55,12 +62,15 @@ const contactsSlice = createSlice({
     selectError: state => {
       return state.error;
     },
+    selectDeletedId: state => {
+      return state.deletedId;
+    },
   },
 });
 
 export const contactsReducer = contactsSlice.reducer;
 
-export const { selectContacts, selectLoading, selectError } =
+export const { selectContacts, selectLoading, selectError, selectDeletedId } =
   contactsSlice.selectors;
 
 export const selectFilteredContacts = createSelector(
@@ -74,3 +84,5 @@ export const selectFilteredContacts = createSelector(
     );
   }
 );
+
+export const { setDeletedId } = contactsSlice.actions;

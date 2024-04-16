@@ -2,6 +2,7 @@ import { FaUser } from 'react-icons/fa';
 import { FaPhone } from 'react-icons/fa6';
 import { useDispatch } from 'react-redux';
 import { deleteContact } from '../../redux/contactsOps';
+import { setDeletedId } from '../../redux/contactsSlice';
 import css from './Contact.module.css';
 
 const Contact = ({ name, number, id }) => {
@@ -23,6 +24,7 @@ const Contact = ({ name, number, id }) => {
         type="button"
         className={css.btn}
         onClick={() => {
+          dispatch(setDeletedId(id));
           dispatch(deleteContact(id));
         }}
       >
