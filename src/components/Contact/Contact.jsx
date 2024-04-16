@@ -1,15 +1,16 @@
 import { FaUser } from 'react-icons/fa';
 import { FaPhone } from 'react-icons/fa6';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteContact } from '../../redux/contactsOps';
-import { setDeletedId } from '../../redux/contactsSlice';
 import css from './Contact.module.css';
 
 const Contact = ({ name, number, id }) => {
+  const [isDeleting, setIsDeleting] = useState(false);
   const dispatch = useDispatch();
 
   return (
-    <div className={css.contactItem}>
+    <div className={`${css.contactItem} ${isDeleting ? css.slideOut : ''}`}>
       <div className={css.inputsWrapper}>
         <p className={css.nameText}>
           <FaUser color="#4d5ae5" /> {name}
@@ -24,8 +25,8 @@ const Contact = ({ name, number, id }) => {
         type="button"
         className={css.btn}
         onClick={() => {
-          dispatch(setDeletedId(id));
           dispatch(deleteContact(id));
+          setIsDeleting(true);
         }}
       >
         Delete

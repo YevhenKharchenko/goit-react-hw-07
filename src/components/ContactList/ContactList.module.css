@@ -7,9 +7,9 @@
 .contactListItem {
   margin-left: auto;
   margin-right: auto;
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.slideOut {
-  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  transform: translateX(-300%);
+.contactListItem:hover {
+  transform: scale(1.07);
 }
